@@ -15,6 +15,11 @@
                 <flux:navlist.group :heading="__('Platform')" class="grid">
                     <flux:navlist.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>{{ __('Dashboard') }}</flux:navlist.item>
                 </flux:navlist.group>
+
+                <flux:sidebar.group icon="inbox" expandable heading="Productos" class="grid">
+                    <flux:sidebar.item href="{{ route('products.index') }}">Lista de productos</flux:sidebar.item>
+                    <flux:sidebar.item href="{{ route('products.create') }}">Nuevo producto</flux:sidebar.item>
+                </flux:sidebar.group>
             </flux:navlist>
 
             <flux:spacer />
