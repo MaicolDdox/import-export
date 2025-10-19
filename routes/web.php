@@ -40,6 +40,8 @@ Route::middleware(['auth'])->group(function () {
 
     //RUTA PARA GENERAR PDF
     Route::get('/pdf/generar', [PdfController::class, 'generarPdf'])->name('pdf.generar');
+    Route::get('/pdf/{id}/generar', [PdfController::class, 'generarPdfProduct'])->name('pdf.id.generar');
+
 });
 
 require __DIR__.'/auth.php';

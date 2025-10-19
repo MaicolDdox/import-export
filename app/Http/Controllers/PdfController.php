@@ -23,4 +23,20 @@ class PdfController extends Controller
 
         return response()->download($pdfPath)->deleteFileAfterSend(false);
     }
+
+    public function generarPdfProduct($id)
+    {
+        $product = Product::findOrFail($id);
+
+        $html = view('livewire.view.pdf.show-pdf.show-Product', compact('product'));
+        
+        $pdfPath = storage_path('app/public/pdf/show-Product.pdf');
+        Browsershot::html($html)
+            ->setOption('arg', ['--no-sandbox'])
+            ->format('A4')
+            ->margins(10, 10, 10, 10)
+            ->save($pdfPath);
+
+        return response()->download($pdfPath)->deleteFileAfterSend(false);
+    }
 }

@@ -60,6 +60,9 @@
                                                 Delete
                                             </flux:menu.item>
                                         </form>
+                                        <flux:menu.item href="{{ route('pdf.id.generar', $product->id) }}" icon="document-text" >
+                                            Reporte PDF
+                                        </flux:menu.item>
                                     </flux:menu>
                                 </flux:dropdown>
                             </td>
