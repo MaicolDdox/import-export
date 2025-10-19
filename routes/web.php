@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\PdfController;
 use App\Http\Controllers\ProductController;
 use App\Livewire\Settings\Appearance;
 use App\Livewire\Settings\Password;
@@ -36,6 +37,9 @@ Route::middleware(['auth'])->group(function () {
 
     //RUTA PARA PRODUCTS
     Route::resource('products', ProductController::class);
+
+    //RUTA PARA GENERAR PDF
+    Route::get('/pdf/generar', [PdfController::class, 'generarPdf'])->name('pdf.generar');
 });
 
 require __DIR__.'/auth.php';

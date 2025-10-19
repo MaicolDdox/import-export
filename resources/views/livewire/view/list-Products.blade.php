@@ -13,8 +13,13 @@
         </div>
     @endif
 
+    <flux:button class="mb-4" href="{{ route('pdf.generar') }}" icon="document-arrow-down">
+        Descargar Reporte PDF
+    </flux:button>
+
 
     <div class="bg-white shadow-lg w-full overflow-auto">
+
         @if ($products->isEmpty())
 
             <div class="bg-white max-w-lg mx-auto shadow-lg mt-8 p-6">
