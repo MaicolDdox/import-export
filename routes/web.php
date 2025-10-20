@@ -8,6 +8,7 @@ use App\Livewire\Settings\Profile;
 use App\Livewire\Settings\TwoFactor;
 use Illuminate\Support\Facades\Route;
 use Laravel\Fortify\Features;
+use Maatwebsite\Excel\Facades\Excel;
 
 Route::get('/', function () {
     return view('welcome');
@@ -18,6 +19,10 @@ Route::view('dashboard', 'dashboard')
     ->name('dashboard');
 
 Route::middleware(['auth'])->group(function () {
+
+    // Ruta para exportar formato excel
+    Route::get('products/export', [ProductController::class, 'export'])->name('products.export');
+
     Route::redirect('settings', 'settings/profile');
 
     Route::get('settings/profile', Profile::class)->name('settings.profile');
@@ -35,10 +40,10 @@ Route::middleware(['auth'])->group(function () {
         )
         ->name('two-factor.show');
 
-    //RUTA PARA PRODUCTS
+    // RUTA PARA PRODUCTS
     Route::resource('products', ProductController::class);
 
-    //RUTA PARA GENERAR PDF
+    // RUTA PARA GENERAR PDF
     Route::get('/pdf/generar', [PdfController::class, 'generarPdf'])->name('pdf.generar');
     Route::get('/pdf/{id}/generar', [PdfController::class, 'generarPdfProduct'])->name('pdf.id.generar');
 

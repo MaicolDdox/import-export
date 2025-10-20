@@ -17,6 +17,11 @@
         Descargar Reporte PDF
     </flux:button>
 
+    <flux:button href="{{ route('products.export') }}" icon="document-text">
+    Descargar Reporte EXCEL
+    </flux:button>
+
+
 
     <div class="bg-white shadow-lg w-full overflow-auto">
 

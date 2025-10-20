@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use Rap2hpoutre\FastExcel\FastExcel;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\ProductsExport;
 
 class ProductController extends Controller
 {
@@ -13,7 +17,8 @@ class ProductController extends Controller
     public function index()
     {
         $products = Product::all();
-        return view('livewire.view.list-Products',compact('products'));
+
+        return view('livewire.view.list-Products', compact('products'));
     }
 
     /**
@@ -84,5 +89,24 @@ class ProductController extends Controller
         $product->delete();
 
         return redirect()->route('products.index')->with('success', 'Producto eliminado correctamente');
+    }
+
+    public function export()
+    {
+        return Excel::download(new ProductsExport, 'products.xlsx');
+    }
+
+    public function voyAllorar()
+    {
+        $products = Product::all();
+
+        $fileName = 'products.xlsx';
+        $filePath = storage_path('app/public/excel/'.$fileName);
+
+        // Exportar los datos
+        (new FastExcel($products))->export($filePath);
+
+        // Descargar el archivo
+        return response()->download($filePath)->deleteFileAfterSend(false);
     }
 }
